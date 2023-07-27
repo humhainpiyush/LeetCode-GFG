@@ -1,13 +1,21 @@
-class Solution {
-    public int findDuplicate(int[] nums) {
-        Arrays.sort(nums);
-        int lastDuplicate = 0;
-        for(int i = 0; i< nums.length-1; i++){
-            if(nums[i] == nums[i+1] && nums[i] != lastDuplicate){
-                System.out.println(nums[i]);
-                lastDuplicate = nums[i];
+class Solution
+{
+    public int findDuplicate(int[] nums){
+        int size = nums.length;
+        int m = Integer.MIN_VALUE;
+        int i = 0;
+        for(i = 0; i<size; i++){
+            m = Math.max(m, nums[i]);
+        }
+        int arr[] = new int[m+1];
+        for(i = 0; i<arr.length; i++){
+            arr[nums[i]]++;
+        }
+        for(i=0; i<arr.length; i++){
+            if(arr[i]>1){
+                return i;
             }
         }
-        return lastDuplicate;
+        return nums.length;
     }
 }
